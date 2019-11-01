@@ -12,7 +12,7 @@ app.get('/', function(request, response) {
   response.send('Hello World!')
 })
 
-router.get("/chat", function(req,res){
+app.get("/chat", function(req,res){
   res.sendFile(path + "chat.html");
 })
 
