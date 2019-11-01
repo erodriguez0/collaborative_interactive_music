@@ -16,7 +16,12 @@ router.get("/chat", function(req,res){
   res.sendFile(path + "chat.html");
 })
 
-app.use("/", router);
+io.on('connection', function(socket){
+  console.log('a user connected');
+  socket.on('disconnect', function(){
+    console.log('user disconnected');
+  })
+})
 
 
 app.listen(app.get('port'), function() {
