@@ -12,6 +12,11 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 .w3-bar,h1,button {font-family: "Montserrat", sans-serif}
 .fa-anchor,.fa-coffee {font-size:200px}
 </style>
+<head>
+    
+  <script src="https://rawgit.com/nexus-js/ui/master/dist/NexusUI.js%22%3E"></script>
+</head>
+
 <body>
 
 <!-- Navbar -->
@@ -37,6 +42,20 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <!-- Header -->
 <header class="container blue center" style="padding:128px 16px">
   <h1 class="margin jumbo">Piano</h1>
+  
+  <script>
+  var piano = new Nexus.Piano('piano',{
+    'size': [500,125],
+    'mode': 'button',  // 'button', 'toggle', or 'impulse'
+    'lowNote': 24,
+    'highNote': 60
+})
+</script>
+<div id='piano'>
+
+  
+</div>
+
   <p class="xlarge"></p>
   
 </header>
