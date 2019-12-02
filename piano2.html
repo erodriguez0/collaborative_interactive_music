@@ -7,14 +7,16 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
-.w3-bar,h1,button {font-family: "Montserrat", sans-serif}
-.fa-anchor,.fa-coffee {font-size:200px}
-</style>
+
 <head>
+  <style>
+    body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
+    .w3-bar,h1,button {font-family: "Montserrat", sans-serif}
+    .fa-anchor,.fa-coffee {font-size:200px}
+  </style>
     
   <script src="https://rawgit.com/nexus-js/ui/master/dist/NexusUI.js"></script>
+  <script src="https://unpkg.com/tone"></script>
 </head>
 
 <body>
@@ -24,31 +26,60 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
   <div class="bar light-grey card left-align large">
     <a class="bar-item button hide-medium hide-large right padding-large hover-white large red" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
     <a href="#" class="bar-item button padding-large white">Home</a>
+    
   </div>
 
   <!-- Navbar on small screens -->
   <div id="navDemo" class="bar-block white hide hide-large hide-medium large">
-    
+  
   </div>
 </div>
 
 <!-- Header -->
-<header class="container blue center" style="padding:128px 16px">
-  <h1 class="margin jumbo">Piano</h1>
-  
+<header class="container padding-10 center blue center" style="padding:128px 16px">
+  <h1 class="margin jumbo">Virtual Piano</h1>
+  <div id='piano'></div>
   <script>
-  var piano = new Nexus.Piano('piano',{
-    'size': [500,125],
-    'mode': 'button',  // 'button', 'toggle', or 'impulse'
-    'lowNote': 24,
-    'highNote': 60
-})
-</script>
-<div id='piano'></div>
+    var synth = new Tone.Synth().toMaster();
+    var piano = new Nexus.Piano('#piano', {
+      'size': [1625,300],
+      'lowNote': 72,
+      'highNote': 92
+    })
+    const triggerKeyPress = note => {
+      synth.triggerAttackRelease(note, '16n')
+    }
+    piano.on('change', event =>{
+      let note = event.note, on = event.state
+      if(on && note === 92) triggerKeyPress('C3')
+      else if(on && note === 84) triggerKeyPress('C5')
+      else if(on && note === 83) triggerKeyPress('B4')
+      else if(on && note === 82) triggerKeyPress('Bb4')
+      else if(on && note === 81) triggerKeyPress('A4')
+      else if(on && note === 80) triggerKeyPress('Ab4')
+      else if(on && note === 79) triggerKeyPress('G4')
+      else if(on && note === 78) triggerKeyPress('Gb4')
+      else if(on && note === 77) triggerKeyPress('F4')
+      else if(on && note === 76) triggerKeyPress('E4')
+      else if(on && note === 75) triggerKeyPress('Eb4')
+      else if(on && note === 74) triggerKeyPress('D4')
+      else if(on && note === 73) triggerKeyPress('Db4')
+      else if(on && note === 72) triggerKeyPress('C4')
+    })
+  </script>
+
 
   <p class="xlarge"></p>
   
 </header>
+
+
+<div class="container black center opacity padding-16">
+    <h1 class="margin large">User 1</h1>
+	
+	
+	
+</div>
 
 <!-- Footer -->
 <footer class="container padding-32 center opacity">  
