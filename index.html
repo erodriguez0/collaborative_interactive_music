@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Piano</title>
+    <style>
+    </style>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="https://rawgit.com/nexus-js/ui/master/dist/NexusUI.js"></script>
+    <script src="https://unpkg.com/tone"></script>
+  </head>
+  <body>
+    <div id="piano">Piano</div>
+    <script>
+        
+        const piano = new Nexus.Piano('#piano',{
+            'size': [1400,350],
+            'lowNote': 48,
+            'highNote': 96
+        })
+    </script>
+    <script>
+        //create a synth and connect it to the master output (your speakers)
+        var synth = new Tone.Synth().toMaster();
+
+        //play a middle 'C' for the duration of an 8th note
+        //synth.triggerAttackRelease("C4", "8n");
+        const triggerKeyPress = note => {
+        synth.triggerAttackRelease(note, '16n')
+        }
+        piano.on('change', event => {
+        let note = event.note, on = event.state
+        if(on && note === 96) triggerKeyPress('C6') 
+        else if(on && note === 95) triggerKeyPress('B5')
+        else if(on && note === 94) triggerKeyPress('Bb5')
+        else if(on && note === 93) triggerKeyPress('A5')
+        else if(on && note === 92) triggerKeyPress('Ab5')
+        else if(on && note === 91) triggerKeyPress('G5')
+        else if(on && note === 90) triggerKeyPress('Gb5')
+        else if(on && note === 89) triggerKeyPress('F5')
+        else if(on && note === 88) triggerKeyPress('E5')
+        else if(on && note === 87) triggerKeyPress('Eb5')
+        else if(on && note === 86) triggerKeyPress('D5')
+        else if(on && note === 85) triggerKeyPress('Db5')
+        else if(on && note === 84) triggerKeyPress('C5') 
+        else if(on && note === 83) triggerKeyPress('B4')
+        else if(on && note === 82) triggerKeyPress('Bb4')
+        else if(on && note === 81) triggerKeyPress('A4')
+        else if(on && note === 80) triggerKeyPress('Ab4')
+        else if(on && note === 79) triggerKeyPress('G4')
+        else if(on && note === 78) triggerKeyPress('Gb4')
+        else if(on && note === 77) triggerKeyPress('F4')
+        else if(on && note === 76) triggerKeyPress('E4')
+        else if(on && note === 75) triggerKeyPress('Eb4')
+        else if(on && note === 74) triggerKeyPress('D4')
+        else if(on && note === 73) triggerKeyPress('Db4')
+        else if(on && note === 72) triggerKeyPress('C4')
+        else if(on && note === 71) triggerKeyPress('B3')
+        else if(on && note === 70) triggerKeyPress('Bb3')
+        else if(on && note === 69) triggerKeyPress('A3')
+        else if(on && note === 68) triggerKeyPress('Ab3')
+        else if(on && note === 67) triggerKeyPress('G3')
+        else if(on && note === 66) triggerKeyPress('Gb3')
+        else if(on && note === 65) triggerKeyPress('F3')
+        else if(on && note === 64) triggerKeyPress('E3')
+        else if(on && note === 63) triggerKeyPress('Eb3')
+        else if(on && note === 62) triggerKeyPress('D3')
+        else if(on && note === 61) triggerKeyPress('Db3')
+        else if(on && note === 60) triggerKeyPress('C3')
+        else if(on && note === 59) triggerKeyPress('B2')
+        else if(on && note === 58) triggerKeyPress('Bb2')
+        else if(on && note === 57) triggerKeyPress('A2')
+        else if(on && note === 56) triggerKeyPress('Ab2')
+        else if(on && note === 55) triggerKeyPress('G2')
+        else if(on && note === 54) triggerKeyPress('Gb2')
+        else if(on && note === 53) triggerKeyPress('F2')
+        else if(on && note === 52) triggerKeyPress('E2')
+        else if(on && note === 51) triggerKeyPress('Eb2')
+        else if(on && note === 50) triggerKeyPress('D2')
+        else if(on && note === 49) triggerKeyPress('Db2')
+        else if(on && note === 48) triggerKeyPress('C2')
+        })
+
+        socket.on('press-key', payload => {
+            socket.broadcast.emit('press-key', payload);
+        });
+    </script>
+  </body>
+</html>

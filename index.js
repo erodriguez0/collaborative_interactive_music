@@ -4,6 +4,9 @@ var http = require('http').createServer(app);
 var io = require('socket.io')(http);
 const router = express.Router();
 const path = __dirname + '/'
+const synth = new Tone.synth;
+synth.toMaster();
+synth.triggerAttack('C4','8n');
 
 app.set('port', (process.env.PORT || 5000))
 app.use(express.static(__dirname + '/public'))
