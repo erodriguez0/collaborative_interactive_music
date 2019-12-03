@@ -5,8 +5,6 @@ const socketio = require('socket.io');
 const server = app.listen(3000, () =>{
     console.log(`Listening on port ${server.address().port}`)
 })
-
-//var io = require('socket.io')(server);
 const io = socketio(server);
 
 //var express = require('express')
@@ -43,7 +41,7 @@ io.on('connection', function(socket){
 });
 
 
-app.listen(app.get('port'), function() {
-  console.log("Node app is running at localhost:" + app.get('port'))
-})
+//app.listen(app.get('port'), function() {
+  //console.log("Node app is running at localhost:" + app.get('port'))
+//})
 
