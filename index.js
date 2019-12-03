@@ -1,15 +1,26 @@
-var express = require('express')
-var app = express()
+var app = require('express')();
 var http = require('http').createServer(app);
-var io = require('socket.io')(http);
-const router = express.Router();
-const path = __dirname + '/'
-const synth = new Tone.synth;
-synth.toMaster();
-synth.triggerAttack('C4','8n');
+const socketio = require('socket.io');
 
-app.set('port', (process.env.PORT || 5000))
-app.use(express.static(__dirname + '/public'))
+const server = app.listen(3000, () =>{
+    console.log(`Listening on port ${server.address().port}`)
+})
+
+//var io = require('socket.io')(server);
+const io = socketio(server);
+
+//var express = require('express')
+//var app = express()
+//var http = require('http').createServer(app);
+//var io = require('socket.io')(http);
+//const router = express.Router();
+//const path = __dirname + '/'
+//const synth = new Tone.synth;
+//synth.toMaster();
+//synth.triggerAttack('C4','8n');
+
+//app.set('port', (process.env.PORT || 5000))
+//app.use(express.static(__dirname + '/public'))
 
 //app.get('/', function(request, response) {
 //  response.send('Hello World!')
