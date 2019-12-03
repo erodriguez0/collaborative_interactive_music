@@ -15,8 +15,6 @@ app.get('/', function(request, response) {
   response.send('Hello World!')
 })
 
-
-
 app.get("/chat", function(req,res){
   res.sendFile(path + "chat.html");
 })
