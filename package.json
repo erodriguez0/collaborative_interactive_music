@@ -16,11 +16,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/heroku/node-js-sample"
+    "url": "https://github.com/erodriguez0/collaborative_interactive_music"
   },
   "keywords": [
     "node",
-    "heroku",
     "express"
   ],
   "author": "",
