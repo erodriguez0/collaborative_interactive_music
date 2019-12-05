@@ -19,6 +19,11 @@ app.get("/chat", function(req,res){
   res.sendFile(path + "chat.html");
 })
 
+app.get("/index", function(req,res){
+  res.sendFile(path + "index.html");
+})
+
+
 io.on('connection', function(socket){
   socket.on('chat message', function(msg){
     io.emit('chat message', msg);
