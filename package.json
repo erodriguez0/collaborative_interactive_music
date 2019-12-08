@@ -12,11 +12,11 @@
     "tone": "^13.8.25"
   },
   "engines": {
-    "node": "4.0.0"
+    "node": "10.x"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/erodriguez0/collaborative_interactive_music"
+    "url": "https://github.com/mattrg/cimw"
   },
   "keywords": [
     "node",

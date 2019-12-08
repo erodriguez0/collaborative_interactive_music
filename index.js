@@ -1,41 +1,38 @@
 var express = require('express')
-var app = express()
+const socketIO = require('socket.io');
+const path = require('path');
+
+const PORT = process.env.PORT || 3000;
+const INDEX = path.join(__dirname, 'index.html');
+const app = express()
+  .use((req, res) => res.sendFile(INDEX) )
+  .listen(PORT, () => console.log(`Listening on ${ PORT }`));
+
 var http = require('http').createServer(app);
-var io = require('socket.io')(http);
 const router = express.Router();
-const path = __dirname + '/'
-const synth = new Tone.synth;
-synth.toMaster();
-synth.triggerAttack('C4','8n');
+const io = socketIO(app);
 
-app.set('port', (process.env.PORT || 5000))
-app.use(express.static(__dirname + '/public'))
-
-app.get('/', function(request, response) {
-  response.send('Hello World!')
-})
-
-app.get("/chat", function(req,res){
-  res.sendFile(path + "chat.html");
-})
-
-app.get("/index", function(req,res){
-  res.sendFile(path + "index.html");
-})
-
-
-io.on('connection', function(socket){
-  socket.on('chat message', function(msg){
-    io.emit('chat message', msg);
-    console.log('message: ' + msg);
-  });
-  console.log('a user connected');
-  socket.on('disconnect', function(){
-    console.log('user disconnected');
-  });
+io.on('connection', (socket) => {
+  console.log('Client connected');
+  socket.on('press-key', payload => {
+    socket.broadcast.emit('press-key', payload)
+    })
+  socket.on('disconnect', () => console.log('Client disconnected'));
 });
 
+//app.get('/', function(request, response) {
+  //response.send('Hello World!')
+//})
 
-app.listen(app.get('port'), function() {
-  console.log("Node app is running at localhost:" + app.get('port'))
-})
+//app.get("/chat", function(req,res){
+  //res.sendFile(path + "chat.html");
+//})
+
+//app.get("/index", function(req,res){
+  //res.sendFile(path + "index.html");
+//})
+
+
+//app.listen(app.get('port'), function() {
+  //console.log("Node app is running at localhost:" + app.get('port'))
+//})
